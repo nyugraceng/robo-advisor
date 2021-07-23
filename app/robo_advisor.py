@@ -1,3 +1,19 @@
+import requests
+import json
+
+from pprint import pprint
+
+from getpass import getpass # secret version of the import function
+# locally we'll wan t to use env vars
+# but on colab we can use getpass / input them
+api_key = getpass("Please input your api key:")
+symbol = "MSFT"
+stock_url = f"https://www.alphavantage.co/query?function=TIME_SERIES_DAILY_ADJUSTED&symbol={symbol}&apikey={api_key}"
+response = requests.get(stock_url)
+parsed_response = json.loads(response.text)
+print(type(parsed_response))
+pprint(parsed_response)
+
 # this is the "app/robo_advisor.py" file
 
 print("-------------------------")
