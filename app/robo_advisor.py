@@ -11,7 +11,8 @@ print(response.text)
 
 parsed_response = json.loads(response.text)
 
-last_refreshed = parsed_response["Meta Data"]["3. Last Refereshed"]
+last_refreshed = parsed_response["Meta Data"]["3. Last Refreshed"]
+
 
 breakpoint()
 
