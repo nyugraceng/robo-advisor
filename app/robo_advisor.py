@@ -18,9 +18,13 @@ parsed_response = json.loads(response.text)
 
 last_refreshed = parsed_response["Meta Data"]["3. Last Refreshed"]
 
-latest_close = parsed_response["Time Series (Daily)"]["2021-07-30"]["4. close"] #> $100.00
+tsd = parsed_response["Time Series (Daily)"]
 
-#breakpoint()
+dates = list(tsd.keys()) #sort to ensure latest day is first 
+
+latest_day = dates[0] # "2021-07-30"
+
+latest_close = tsd[latest_day]["4. close"] #> $100.00
 
 #from getpass import getpass # secret version of the import function
 # locally we'll wan t to use env vars
