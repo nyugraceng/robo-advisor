@@ -20,11 +20,31 @@ last_refreshed = parsed_response["Meta Data"]["3. Last Refreshed"]
 
 tsd = parsed_response["Time Series (Daily)"]
 
-dates = list(tsd.keys()) #sort to ensure latest day is first 
+# sort to ensure latest day is first 
+dates = list(tsd.keys()) 
 
-latest_day = dates[0] # "2021-07-30"
+latest_day = dates[0] 
 
-latest_close = tsd[latest_day]["4. close"] #> $100.00
+latest_close = tsd[latest_day]["4. close"] 
+
+# getting high price from each day
+
+high_prices = []
+low_prices = []
+
+for date in dates:
+    high_price = tsd[date]["2. high"]
+    high_prices.append(float(high_price))
+    low_price = tsd[date]["3. low"]
+    low_prices.append(float(low_price))
+
+
+# max of all the high prices 
+#high_prices = [10, 20, 30, 5]
+
+recent_high = max(high_prices) 
+recent_low = min(low_prices) 
+
 
 #from getpass import getpass # secret version of the import function
 # locally we'll wan t to use env vars
@@ -33,17 +53,16 @@ latest_close = tsd[latest_day]["4. close"] #> $100.00
 
 # this is the "app/robo_advisor.py" file
 
-
 print("-------------------------")
 print("SELECTED SYMBOL: IBM")
 print("-------------------------")
 print("REQUESTING STOCK MARKET DATA...")
-print("REQUEST AT: 2018-02-20 02:00pm") #use day time module
+print("REQUEST AT: 2018-02-20 02:00pm") 
 print("-------------------------")
 print(f"LATEST DAY: {last_refreshed}")
 print(f"LATEST CLOSE: {to_usd(float(latest_close))}")
-print("RECENT HIGH: $101,000.00")
-print("RECENT LOW: $99,000.00")
+print(f"RECENT HIGH: {to_usd(float(recent_high))}")
+print(f"RECENT LOW: {to_usd(float(recent_low))}")
 print("-------------------------")
 print("RECOMMENDATION: BUY!")
 print("RECOMMENDATION REASON: TODO")
