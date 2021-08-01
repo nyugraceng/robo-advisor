@@ -47,24 +47,24 @@ for date in dates:
 recent_high = max(high_prices) 
 recent_low = min(low_prices) 
 
-
-#from getpass import getpass # secret version of the import function
-# locally we'll wan t to use env vars
-# but on colab we can use getpass / input them
-#api_key = getpass("Please input your api key:")
-
-# this is the "app/robo_advisor.py" file
-
 # csv_file_path = "data/prices.csv" change to be OS friendly
 csv_file_path = os.path.join(os.path.dirname(__file__), "..", "data", "prices.csv")
 
+csv_headers = ["timestamp", "open", "high", "low", "close", "volume"]
+
 with open(csv_file_path, "w") as csv_file: # "w" means "open the file for writing"
-    writer = csv.DictWriter(csv_file, fieldnames=["city", "name"])
+    writer = csv.DictWriter(csv_file, fieldnames=csv_headers)
     writer.writeheader() # uses fieldnames set above
-    writer.writerow({"city": "New York", "name": "Yankees"})
-    writer.writerow({"city": "New York", "name": "Mets"})
-    writer.writerow({"city": "Boston", "name": "Red Sox"})
-    writer.writerow({"city": "New Haven", "name": "Ravens"})
+    for date in dates:
+        writer.writerow({
+            "timestamp": date,
+            "open": "TODO",
+            "high": "TODO",
+            "low": "TODO",
+            "close": "TODO",
+            "volume": "TODO"
+        })
+
 
 print("-------------------------")
 print("SELECTED SYMBOL: IBM")
@@ -80,7 +80,7 @@ print("-------------------------")
 print("RECOMMENDATION: BUY!")
 print("RECOMMENDATION REASON: TODO")
 print("-------------------------")
-print(f"WRITING DATA TO CSV: {csv_file_path} ..")
+print(f"WRITING DATA TO CSV: {csv_file_path }..")
 print("-------------------------")
 print("HAPPY INVESTING!")
 print("-------------------------")
